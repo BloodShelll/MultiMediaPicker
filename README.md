@@ -64,7 +64,7 @@ Vencord build. Then quit Discord completely, start it again, and enable
 | **Pinterest** | No | Public web resource endpoint, works with no cookies and no login. |
 | **PicsArt** | No | `api.picsart.com` photo search. Thumbnails use the CDN resize param (`?type=webp&to=min&r=240`), ~10 KB instead of ~320 KB. |
 | **PicsArt Stickers** | No | Same API, transparent PNG cutouts. |
-| **Openverse** | No | Official open API, CC-licensed images. |
+| **Openverse** | No | Official open API, CC-licensed images. Anonymous requests are capped at `page_size=20`; asking for more returns `401 page_size may not exceed 20 for anonymous requests`. |
 | **Wikimedia** | No | Commons `File:` namespace search. |
 | **Giphy** | **Yes** | Stays out of the dropdown until a key is set. The old public demo key `dc6zaTOxFJmzC` now returns `403 BANNED`. |
 

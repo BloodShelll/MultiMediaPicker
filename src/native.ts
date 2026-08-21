@@ -13,9 +13,23 @@ const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
 
 const TIMEOUT_MS = 20_000;
 const PICSART_PAGE = 50;
-const OPENVERSE_PAGE = 40;
+const OPENVERSE_PAGE = 20;
 const WIKI_PAGE = 40;
 const GIPHY_PAGE = 50;
+
+async function describeFailure(res: Response): Promise<string> {
+    const body = await res.text().catch(() => "");
+
+    try {
+        const parsed = JSON.parse(body) as { detail?: string; message?: string; };
+        const detail = parsed.detail ?? parsed.message;
+        if (detail) return detail;
+    } catch {
+        // not JSON, fall through to the raw text
+    }
+
+    return body.trim().slice(0, 140) || res.statusText;
+}
 
 async function getJson<T>(url: string, headers: Record<string, string> = {}): Promise<T> {
     const controller = new AbortController();
@@ -32,7 +46,7 @@ async function getJson<T>(url: string, headers: Record<string, string> = {}): Pr
             }
         });
 
-        if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}: ${await describeFailure(res)}`);
 
         return await res.json() as T;
     } finally {
