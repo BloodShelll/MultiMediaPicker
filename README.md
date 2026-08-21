@@ -141,7 +141,13 @@ because the main process only loads it at startup.
 - `authors` uses an inline entry rather than `Devs`/`EquicordDevs`, which the
   repository rules require. There is no way around that for a userplugin whose
   author is not in the shared constants.
-- This cannot be upstreamed to Equicord as-is: the plugin policy excludes
-  plugins relying on user-supplied API keys or untrusted third-party endpoints,
-  and this one does both.
+- Upstreaming: Equicord's plugin policy rules this out as-is, since it excludes
+  anything relying on user-supplied API keys or untrusted third-party endpoints.
+  Vencord's rules are narrower — they bar *self hosted* third party APIs and
+  plugins that *require* a user API key. Pinterest and PicsArt are neither self
+  hosted nor required-key, and the Giphy tab is optional and hidden by default,
+  so a Vencord submission is not ruled out on its face. It would still need the
+  Giphy tab dropped, `authors` moved to `Devs`, and the CSP hosts folded into the
+  same PR. Their CONTRIBUTING asks you to raise the idea with them before
+  opening a PR, which is the right first step.
 - `TenorGifSearch` patches the same two fetch functions. Do not run both.
