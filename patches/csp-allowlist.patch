@@ -1,0 +1,15 @@
+diff --git a/src/main/csp/index.ts b/src/main/csp/index.ts
+index 55c0c17..62ca9c0 100644
+--- a/src/main/csp/index.ts
++++ b/src/main/csp/index.ts
+@@ -42,6 +42,10 @@ export const CspPolicies: PolicyMap = {
+     "i.imgur.com": ImageSrc, // Imgur, used by some themes
+     "i.ibb.co": ImageSrc, // ImgBB, used by some themes
+     "i.pinimg.com": ImageSrc, // Pinterest, used by some themes
++    "*.picsart.com": ImageSrc, // PicsArt CDN, used by MultiMediaPicker
++    "upload.wikimedia.org": ImageSrc, // Wikimedia Commons, used by MultiMediaPicker
++    "api.openverse.org": ImageSrc, // Openverse thumbnails, used by MultiMediaPicker
++    "*.giphy.com": ImageSrc, // Giphy CDN, used by MultiMediaPicker
+     "files.catbox.moe": ImageAndCssSrc, // Catbox, used by some themes
+ 
+     "cdn.discordapp.com": ImageAndCssSrc, // Discord CDN, used by Vencord and some themes to load media
