@@ -45,7 +45,7 @@ cd Equicord && corepack enable && pnpm install
 ```
 
 ```bash
-git clone https://github.com/seemyartt-lgtm/MultiMediaPicker /tmp/mmp && mkdir -p src/userplugins/multiMediaPicker && cp /tmp/mmp/src/* src/userplugins/multiMediaPicker/ && git apply /tmp/mmp/patches/csp-allowlist.patch
+git clone https://github.com/BloodShelll/MultiMediaPicker /tmp/mmp && mkdir -p src/userplugins/multiMediaPicker && cp /tmp/mmp/src/* src/userplugins/multiMediaPicker/ && git apply /tmp/mmp/patches/csp-allowlist.patch
 ```
 
 ```bash
