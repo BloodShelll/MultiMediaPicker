@@ -64,7 +64,7 @@ Vencord build. Then quit Discord completely, start it again, and enable
 | **Pinterest** | No | Public web resource endpoint, works with no cookies and no login. |
 | **PicsArt** | No | `api.picsart.com` photo search. Thumbnails use the CDN resize param (`?type=webp&to=min&r=240`), ~10 KB instead of ~320 KB. |
 | **PicsArt Stickers** | No | Same API, transparent PNG cutouts. |
-| **Openverse** | No | Official open API, CC-licensed images. Anonymous requests are capped at `page_size=20`; asking for more returns `401 page_size may not exceed 20 for anonymous requests`. |
+| **Openverse** | No | Official open API, CC-licensed images. |
 | **Wikimedia** | No | Commons `File:` namespace search. |
 | **Giphy** | **Yes** | Stays out of the dropdown until a key is set. The old public demo key `dc6zaTOxFJmzC` now returns `403 BANNED`. |
 
@@ -79,6 +79,12 @@ Two request details found by testing rather than from documentation:
   though the extra fields are all nulls and defaults.
 - Wikimedia needs `gsrnamespace=6`. Without it the generator searches articles
   instead of files and comes back empty, not an error.
+- Wikimedia throttles on User-Agent policy, not on volume. A UA without a
+  version and a contact URL gets `429` on the very first request, while a
+  compliant one like `MultiMediaPicker/1.0 (<project url>)` returns `200`
+  every time. Measured side by side: three 429s against three 200s.
+- Openverse caps anonymous requests at `page_size=20` and answers `401` above
+  that, so a page size of 40 fails every single time rather than intermittently.
 
 ## Layout
 

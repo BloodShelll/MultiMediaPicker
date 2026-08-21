@@ -11,6 +11,8 @@ import type { MediaItem, ProviderId, SearchResult } from "./types";
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
     "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
 
+const WIKI_UA = "MultiMediaPicker/1.0 (https://github.com/BloodShelll/MultiMediaPicker)";
+
 const TIMEOUT_MS = 20_000;
 const PICSART_PAGE = 50;
 const OPENVERSE_PAGE = 20;
@@ -227,7 +229,7 @@ async function wikimedia(query: string, cursor?: string): Promise<SearchResult> 
     const json = await getJson<{
         query?: { pages?: Record<string, WikiPage>; };
         continue?: { gsroffset?: number; };
-    }>(url, { "User-Agent": "MultiMediaPicker (Equicord userplugin)" });
+    }>(url, { "User-Agent": WIKI_UA });
 
     const items: MediaItem[] = [];
 
