@@ -25,6 +25,37 @@ and keyboard navigation all keep working untouched.
 All three patch regexes were verified against Discord's live `web.js` bundle
 (build fetched 2026-08-21): each matches exactly once.
 
+## Install
+
+Userplugins only load in a **source build**. A prebuilt `.asar` from an installer
+cannot load them.
+
+Works on both Equicord and Vencord. Verified by building inside upstream Vencord
+`ef29bbe`: zero type errors, and `patches/csp-allowlist.patch` applies cleanly
+there too.
+
+Requires Node 20+, pnpm and git.
+
+```bash
+git clone https://github.com/Equicord/Equicord
+```
+
+```bash
+cd Equicord && corepack enable && pnpm install
+```
+
+```bash
+git clone https://github.com/seemyartt-lgtm/MultiMediaPicker /tmp/mmp && mkdir -p src/userplugins/multiMediaPicker && cp /tmp/mmp/src/* src/userplugins/multiMediaPicker/ && git apply /tmp/mmp/patches/csp-allowlist.patch
+```
+
+```bash
+pnpm build && pnpm inject
+```
+
+Substitute `https://github.com/Vendicated/Vencord` in the first command for a
+Vencord build. Then quit Discord completely, start it again, and enable
+**MultiMediaPicker** under Settings then Plugins.
+
 ## Providers
 
 | Provider | Needs a key? | Notes |
